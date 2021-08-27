@@ -2,7 +2,9 @@ import sys
 from pycore import tikzeng
 from pycore import blocks
 
-ADD_INPUT_OUTPUT = False
+ADD_INPUT_OUTPUT = True
+ADD_DIMENSIONS = False
+ADD_CAPTIONS = False
 
 arch = [
     tikzeng.to_head('..'),
@@ -13,22 +15,22 @@ arch = [
 if ADD_INPUT_OUTPUT:
     arch.extend(
         [
-            # # put many images to represent 3d
-            # *[tikzeng.to_input(
-            # 'imgs/raw_input.png',
-            # to=f"({-6.0 + 0.1*i},-0.58,-1.5)",
-            # width=7.8,
-            # height=7.8) for i in range(7)
-            # ],
+            # put many images to represent 3d
+            *[tikzeng.to_input(
+                'imgs/raw_input.png',
+                to=f"({-6.0 + 0.1*i},-0.58,-1.5)",
+                width=7.8,
+                height=7.8) for i in range(7)
+              ],
             tikzeng.to_Image(
                 "image0",
-                s_filer="204\\^{}3",
-                n_filer=1,
+                s_filer="204\\^{}3" if ADD_DIMENSIONS else "",
+                n_filer=1 if ADD_DIMENSIONS else "",
                 offset="(-5.5,0,0)",
                 height=39.2,
                 depth=39.2,
                 width=4,
-                caption="Raw"),
+                caption="Raw" if ADD_CAPTIONS else ""),
         ]
     )
 
@@ -51,7 +53,7 @@ arch.extend(
         tikzeng.to_Conv(
             "conv1",
             "",
-            n_filer=32,
+            n_filer=32 if ADD_DIMENSIONS else "",
             offset="(-1.1,0,0)",
             height=39.2,
             depth=39.2,
@@ -69,7 +71,7 @@ arch.extend(
 
         tikzeng.to_Image(
             "image2",
-            s_filer="200\\^{}3",
+            s_filer="200\\^{}3" if ADD_DIMENSIONS else "",
             n_filer="",
             offset="(-0.1,0,0)",
             height=38.4,
@@ -80,7 +82,7 @@ arch.extend(
 
         tikzeng.to_Pool(
             name="pool_b1",
-            s_filer="100\\^{}3",
+            s_filer="100\\^{}3" if ADD_DIMENSIONS else "",
             offset="(0,0,0)",
             to="(image2-east)",
             width=2,
@@ -103,7 +105,7 @@ arch.extend(
 
         tikzeng.to_Conv(
             "conv3",
-            n_filer=64,
+            n_filer=64 if ADD_DIMENSIONS else "",
             s_filer="",
             offset="(3.2,0,0)",
             height=19.2,
@@ -125,7 +127,7 @@ arch.extend(
         tikzeng.to_Image(
             "image4",
             n_filer="",
-            s_filer="96\\^{}3",
+            s_filer="96\\^{}3" if ADD_DIMENSIONS else "",
             offset="(4.2,0,0)",
             height=18.4,
             depth=18.4,
@@ -133,7 +135,7 @@ arch.extend(
 
         tikzeng.to_Pool(
             name="pool_b2",
-            s_filer="48\\^{}3",
+            s_filer="48\\^{}3" if ADD_DIMENSIONS else "",
             offset="(0,0,0)",
             to="(image4-east)",
             width=2,
@@ -156,7 +158,7 @@ arch.extend(
 
         tikzeng.to_Conv(
             "conv5",
-            n_filer=128,
+            n_filer=128 if ADD_DIMENSIONS else "",
             s_filer="",
             offset="(6.5,0,0)",
             height=9.2,
@@ -177,7 +179,7 @@ arch.extend(
         tikzeng.to_Image(
             "image6",
             n_filer="",
-            s_filer="44\\^{}3",
+            s_filer="44\\^{}3" if ADD_DIMENSIONS else "",
             offset="(7.5,0,0)",
             height=8.4,
             depth=8.4,
@@ -185,7 +187,7 @@ arch.extend(
 
         tikzeng.to_Pool(
             name="pool_b3",
-            s_filer="22\\^{}3",
+            s_filer="22\\^{}3" if ADD_DIMENSIONS else "",
             offset="(0,0,0)",
             to="(image6-east)",
             width=2,
@@ -208,7 +210,7 @@ arch.extend(
 
         tikzeng.to_Conv(
             "conv7",
-            n_filer=256,
+            n_filer=256 if ADD_DIMENSIONS else "",
             s_filer="",
             offset="(9.5,0,0)",
             height=2.8,
@@ -229,7 +231,7 @@ arch.extend(
         tikzeng.to_Image(
             "image8",
             n_filer="",
-            s_filer="18\\^{}3",
+            s_filer="18\\^{}3" if ADD_DIMENSIONS else "",
             offset="(10.5,0,0)",
             height=2,
             depth=2,
@@ -264,7 +266,7 @@ arch.extend(
 
         tikzeng.to_Conv(
             "conv9",
-            n_filer=128,
+            n_filer=128 if ADD_DIMENSIONS else "",
             s_filer="",
             offset="(12.6,0,0)",
             height=6.0,
@@ -283,7 +285,7 @@ arch.extend(
         tikzeng.to_Image(
             "image10",
             n_filer="",
-            s_filer="32\\^{}3",
+            s_filer="32\\^{}3" if ADD_DIMENSIONS else "",
             offset="(13.6,0,0)",
             height=5.2,
             depth=5.2,
@@ -316,7 +318,7 @@ arch.extend(
 
         tikzeng.to_Conv(
             "conv11",
-            n_filer=64,
+            n_filer=64 if ADD_DIMENSIONS else "",
             s_filer="",
             offset="(15.7,0,0)",
             height=10.4,
@@ -334,7 +336,7 @@ arch.extend(
 
         tikzeng.to_Image(
             "image12",
-            s_filer="60\\^{}3",
+            s_filer="60\\^{}3" if ADD_DIMENSIONS else "",
             n_filer="",
             offset="(16.7,0,0)",
             height=9.6,
@@ -368,7 +370,7 @@ arch.extend(
 
         tikzeng.to_Conv(
             "conv13",
-            n_filer=32,
+            n_filer=32 if ADD_DIMENSIONS else "",
             s_filer="",
             offset="(19.2,0,0)",
             height=19.2,
@@ -386,8 +388,8 @@ arch.extend(
 
         tikzeng.to_Image(
             "image14",
-            s_filer="112\\^{}3",
-            n_filer=12,
+            s_filer="112\\^{}3" if ADD_DIMENSIONS else "",
+            n_filer=12 if ADD_DIMENSIONS else "",
             offset="(20.2,0,0)",
             height=18.4,
             depth=18.4,
@@ -411,13 +413,13 @@ if ADD_INPUT_OUTPUT:
         [
             tikzeng.to_Image(
                 "image15",
-                s_filer="center of mass",
-                n_filer=3,
+                s_filer="center of mass" if ADD_CAPTIONS else "",
+                n_filer=3 if ADD_DIMENSIONS else "",
                 offset="(24,0,-3)",
                 height=18.4,
                 depth=18.4,
                 width=2,
-                caption="LSD"),
+                caption="LSD" if ADD_CAPTIONS else ""),
             tikzeng.to_input(
                 'imgs/lsd_center.png',
                 to="(24,-0.4,-4.05)",
@@ -427,13 +429,13 @@ if ADD_INPUT_OUTPUT:
 
             tikzeng.to_Image(
                 "image16",
-                s_filer="variances",
-                n_filer=3,
+                s_filer="variances" if ADD_CAPTIONS else "",
+                n_filer=3 if ADD_DIMENSIONS else "",
                 offset="(26,0,-3)",
                 height=18.4,
                 depth=18.4,
                 width=2,
-                caption="LSD"),
+                caption="LSD" if ADD_CAPTIONS else ""),
             tikzeng.to_input(
                 'imgs/lsd_variance.png',
                 to="(26,-0.4,-4.05)",
@@ -442,13 +444,13 @@ if ADD_INPUT_OUTPUT:
 
             tikzeng.to_Image(
                 "image17",
-                s_filer="covariances",
-                n_filer=3,
+                s_filer="covariances" if ADD_CAPTIONS else "",
+                n_filer=3 if ADD_DIMENSIONS else "",
                 offset="(28,0,-3)",
                 height=18.4,
                 depth=18.4,
                 width=2,
-                caption="LSD"),
+                caption="LSD" if ADD_CAPTIONS else ""),
             tikzeng.to_input(
                 'imgs/lsd_covariance.png',
                 to="(28,-0.4,-4.05)",
@@ -457,13 +459,13 @@ if ADD_INPUT_OUTPUT:
 
             tikzeng.to_Image(
                 "image18",
-                s_filer="size",
-                n_filer=1,
+                s_filer="size" if ADD_CAPTIONS else "",
+                n_filer=1 if ADD_DIMENSIONS else "",
                 offset="(30,0,-3)",
                 height=18.4,
                 depth=18.4,
                 width=1,
-                caption="LSD"),
+                caption="LSD" if ADD_CAPTIONS else ""),
             tikzeng.to_input(
                 'imgs/lsd_size.png',
                 to="(29.8,-0.4,-4.05)",
@@ -482,12 +484,12 @@ if ADD_INPUT_OUTPUT:
             tikzeng.to_Image(
                 "image19",
                 s_filer="",
-                n_filer=2,
+                n_filer=2 if ADD_DIMENSIONS else "",
                 offset="(24,-1.3,3.6)",
                 height=18.4,
                 depth=18.4,
                 width=1,
-                caption="Probability maps"),
+                caption="Probability maps" if ADD_CAPTIONS else ""),
             tikzeng.to_input(
                 'imgs/prob_map.png',
                 to="(23.8,-1.7,2.565)",
