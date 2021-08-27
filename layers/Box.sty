@@ -5,7 +5,9 @@
 % Can be used for conv, deconv etc
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \tikzset{Box/.pic={\tikzset{/boxblock/.cd,#1}
-        \tikzstyle{box}=[every edge/.append style={pic actions, densely dashed, opacity=.7},fill opacity=\opacity, pic actions,fill=\fill]
+        \tikzstyle{box}=[draw=\border,opacity=\eopacity,every edge/.append
+        style={\border, pic actions, densely dashed, opacity=\dopacity},fill
+        opacity=\fopacity, pic actions,fill=\fill]
         
         \pgfmathsetmacro{\y}{\cubey*\scale}
         \pgfmathsetmacro{\z}{\cubez*\scale}
@@ -34,7 +36,8 @@
                 (b) edge (g)
                 (h) edge (g)    
             ;
-            \path (b) edge ["\xlabel"',midway] (c);
+            \path [every edge/.append style={draw=\border, opacity=\eopacity}]
+            (b) edge ["\xlabel"',midway] (c);
             
             \xdef\LastEastx{\k} %\k persists as \LastEastx after loop 
         }%Loop ends
@@ -44,8 +47,11 @@
         \coordinate (b1) at (0 ,-\y/2 , \z/2);
         \tikzstyle{depthlabel}=[pos=0,text width=14*\z,text centered,sloped]       
         
-        \path (c) edge ["\small\zlabel"',depthlabel](f); %depth label
-        \path (b1) edge ["\ylabel",midway] (a1);  %height label
+        \path [every edge/.append style={draw=\border, opacity=\eopacity}] (c)
+        edge ["\small\zlabel"',depthlabel](f); %depth label
+
+        \path [every edge/.append style={draw=\border,opacity=\eopacity}] (b1)
+        edge ["\ylabel",midway] (a1);  %height label
         
         
         \tikzstyle{captionlabel}=[text width=15*\LastEastx/\scale,text centered]       
@@ -95,9 +101,15 @@
     caption/.store      in=\caption,
     name/.store         in=\name,
     fill/.store         in=\fill,
-    opacity/.store      in=\opacity,
+    border/.store       in=\border,
+    eopacity/.store     in=\eopacity,
+    dopacity/.store     in=\dopacity,
+    fopacity/.store     in=\fopacity,
     fill={rgb:red,5;green,5;blue,5;white,15},
-    opacity=0.4,
+    border=black,
+    eopacity=1,
+    dopacity=0.7,
+    fopacity=0.4,
     width=2,
     height=13,
     depth=15,

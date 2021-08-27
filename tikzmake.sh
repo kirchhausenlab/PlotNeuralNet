@@ -8,7 +8,7 @@ rm *.aux *.log *.vscodeLog
 rm *.tex
 
 if [[ "$OSTYPE" == "darwin"* ]]; then
-    open $1.pdf
+    open -a preview $1.pdf
 else
     xdg-open $1.pdf
 fi
