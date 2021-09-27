@@ -12,8 +12,10 @@ def to_head(projectpath):
 \usetikzlibrary{3d} %for including external image
 """
 
+
 # def to_cor():
     # return r"""
+# \def\ImageColor{rgb:gray,5;white,5}
 # \def\ConvColor{rgb:yellow,5;red,2.5;white,5}
 # \def\ConvReluColor{rgb:yellow,5;red,5;white,5}
 # \def\PoolColor{rgb:red,1;black,0.3}
@@ -27,11 +29,11 @@ def to_head(projectpath):
 
 def to_cor():
     return r"""
-\def\ImageColor{rgb:gray,5;white,5}
+\def\ImageColor{rgb:black,5;white,5}
 \def\ConvColor{rgb:blue,5;white,5}
 \def\ConvReluColor{rgb:yellow,5;red,5;white,5}
-\def\PoolColor{rgb:orange,5;white,5}
-\def\UnpoolColor{rgb:green,0.5;black,1;white,1}
+\def\PoolColor{rgb:red,5;orange,5;white,5}
+\def\UnpoolColor{rgb:yellow,5;red,2.5;white,5}
 \def\FcColor{rgb:blue,5;red,2.5;white,5}
 \def\FcReluColor{rgb:blue,5;red,5;white,4}
 \def\SoftmaxColor{rgb:magenta,5;black,7}
@@ -41,12 +43,13 @@ def to_cor():
 
 def to_begin():
     return r"""
-\newcommand{\copymidarrow}{\tikz \draw[-Stealth,line width=0.8mm,draw={rgb:blue,4;red,1;green,1;black,3}] (-0.3,0) -- ++(0.3,0);}
+\def\skipcolor{rgb:blue,4;red,1;green,1;black,3}
+\newcommand{\copymidarrow}{\tikz \draw[-Stealth,line width=0.8mm,draw=\skipcolor] (-0.3,0) -- ++(0.3,0);}
 
 \begin{document}
 \begin{tikzpicture}
 \tikzstyle{connection}=[ultra thick,every node/.style={sloped,allow upside down},draw=\edgecolor,opacity=0.7]
-\tikzstyle{copyconnection}=[ultra thick,every node/.style={sloped,allow upside down},draw={rgb:blue,4;red,1;green,1;black,3},opacity=0.7]
+\tikzstyle{copyconnection}=[ultra thick,every node/.style={sloped,allow upside down},draw=\skipcolor,opacity=0.7]
 """
 
 # layers definition
@@ -266,7 +269,7 @@ def to_connection(of, to):
 
 def to_skip_key(of, to):
     return r"""
-\draw [copyconnection]  (""" + of + """-east)    -- node {\copymidarrow} (""" + to + """-west);
+\draw [copyconnection,dashed]  (""" + of + """-east)    -- node {\copymidarrow} (""" + to + """-west);
 """
 
 
@@ -274,7 +277,7 @@ def to_skip(of, to, pos=1.25):
     return r"""
 \path (""" + of + """-southeast) -- (""" + of + """-northeast) coordinate[pos=""" + str(pos) + """] (""" + of + """-top) ;
 \path (""" + to + """-south)  -- (""" + to + """-north)  coordinate[pos=""" + str(pos) + """] (""" + to + """-top) ;
-\draw [copyconnection]  (""" + of + """-northeast)
+\draw [copyconnection,dashed]  (""" + of + """-northeast)
 -- node {\copymidarrow}(""" + of + """-top)
 -- node {\copymidarrow}(""" + to + """-top)
 -- node {\copymidarrow} (""" + to + """-north);
