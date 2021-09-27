@@ -2,7 +2,7 @@ import sys
 from pycore import tikzeng
 from pycore import blocks
 
-ADD_INPUT_OUTPUT = True
+ADD_INPUT_OUTPUT = False
 ADD_DIMENSIONS = False
 ADD_CAPTIONS = False
 
