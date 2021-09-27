@@ -3,8 +3,8 @@ from pycore import tikzeng
 from pycore import blocks
 
 ADD_INPUT_OUTPUT = True
-ADD_DIMENSIONS = False
-ADD_CAPTIONS = False
+ADD_DIMENSIONS = True
+ADD_CAPTIONS = True
 
 arch = [
     tikzeng.to_head('..'),
@@ -413,64 +413,36 @@ if ADD_INPUT_OUTPUT:
         [
             tikzeng.to_Image(
                 "image15",
-                s_filer="center of mass" if ADD_CAPTIONS else "",
-                n_filer=3 if ADD_DIMENSIONS else "",
-                offset="(24,0,-3)",
-                height=18.4,
-                depth=18.4,
-                width=2,
-                caption="LSD" if ADD_CAPTIONS else ""),
-            tikzeng.to_input(
-                'imgs/lsd_center.png',
-                to="(24,-0.4,-4.05)",
-                width=3.66,
-                height=3.66),
-            tikzeng.to_connection("image14", "image15"),
-
-            tikzeng.to_Image(
-                "image16",
-                s_filer="variances" if ADD_CAPTIONS else "",
-                n_filer=3 if ADD_DIMENSIONS else "",
-                offset="(26,0,-3)",
-                height=18.4,
-                depth=18.4,
-                width=2,
-                caption="LSD" if ADD_CAPTIONS else ""),
-            tikzeng.to_input(
-                'imgs/lsd_variance.png',
-                to="(26,-0.4,-4.05)",
-                width=3.66,
-                height=3.66),
-
-            tikzeng.to_Image(
-                "image17",
-                s_filer="covariances" if ADD_CAPTIONS else "",
-                n_filer=3 if ADD_DIMENSIONS else "",
-                offset="(28,0,-3)",
-                height=18.4,
-                depth=18.4,
-                width=2,
-                caption="LSD" if ADD_CAPTIONS else ""),
-            tikzeng.to_input(
-                'imgs/lsd_covariance.png',
-                to="(28,-0.4,-4.05)",
-                width=3.66,
-                height=3.66),
-
-            tikzeng.to_Image(
-                "image18",
                 s_filer="size" if ADD_CAPTIONS else "",
                 n_filer=1 if ADD_DIMENSIONS else "",
-                offset="(30,0,-3)",
+                offset="(24,0,-3)",
                 height=18.4,
                 depth=18.4,
                 width=1,
                 caption="LSD" if ADD_CAPTIONS else ""),
             tikzeng.to_input(
                 'imgs/lsd_size.png',
-                to="(29.8,-0.4,-4.05)",
+                to="(23.8,-0.4,-4.05)",
                 width=3.66,
                 height=3.66),
+            tikzeng.to_connection("image14", "image15"),
+
+            tikzeng.to_Image(
+                "image16",
+                s_filer="offset to center" if ADD_CAPTIONS else "",
+                n_filer=9 if ADD_DIMENSIONS else "",
+                offset="(26,0,-3)",
+                height=18.4,
+                depth=18.4,
+                width=3,
+                caption="LSD" if ADD_CAPTIONS else ""),
+            tikzeng.to_input(
+                'imgs/lsd_center.png',
+                to="(26.2,-0.4,-4.05)",
+                width=3.66,
+                height=3.66),
+
+
 
             # tikzeng.to_Conv(
             # "conv16",
@@ -488,11 +460,11 @@ if ADD_INPUT_OUTPUT:
                 offset="(24,-1.3,3.6)",
                 height=18.4,
                 depth=18.4,
-                width=1,
+                width=2,
                 caption="Probability maps" if ADD_CAPTIONS else ""),
             tikzeng.to_input(
                 'imgs/prob_map.png',
-                to="(23.8,-1.7,2.565)",
+                to="(24.0,-1.7,2.565)",
                 width=3.66,
                 height=3.66),
             tikzeng.to_connection("image14", "image19"),
