@@ -3,8 +3,8 @@ from pycore import tikzeng
 from pycore import blocks
 
 ADD_INPUT_OUTPUT = True
-ADD_DIMENSIONS = True
-ADD_CAPTIONS = True
+ADD_DIMENSIONS = False
+ADD_CAPTIONS = False
 
 arch = [
     tikzeng.to_head('..'),
@@ -460,11 +460,11 @@ if ADD_INPUT_OUTPUT:
                 offset="(24,-1.3,3.6)",
                 height=18.4,
                 depth=18.4,
-                width=2,
+                width=1,
                 caption="Probability maps" if ADD_CAPTIONS else ""),
             tikzeng.to_input(
                 'imgs/prob_map.png',
-                to="(24.0,-1.7,2.565)",
+                to="(23.8,-1.7,2.565)",
                 width=3.66,
                 height=3.66),
             tikzeng.to_connection("image14", "image19"),
